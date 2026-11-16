@@ -1,0 +1,7 @@
+# Local-only material: old site backup, source media, tools
+/_local/
+/.claude/
+
+# OS junk
+.DS_Store
+Thumbs.db

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alan Stewart · VR / XR Developer</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+<meta name="description" content="Alan Stewart: VR / XR developer in Munich. 7+ years building VR and AR apps in Unreal Engine and Unity.">
+<meta property="og:title" content="Alan Stewart · VR / XR Developer">
+<meta property="og:description" content="7+ years building VR and AR apps in Unreal Engine and Unity.">
+<style>
+  :root {
+    --bg: #12122b; --panel: #1c1c44; --fg: #f4f4ff; --muted: #a9a9d6; --line: #34346b;
+    --yellow: #ffd23f; --pink: #ff4f8b; --cyan: #3ee6e0; --green: #5fe36b;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  }
+  /* Easter egg: the cheat code flips the palette */
+  :root.god { --bg: #fff7d6; --panel: #fff; --fg: #12122b; --muted: #55557a; --line: #12122b; --yellow: #d6336c; --cyan: #0b7285; --green: #2b8a3e; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--cyan); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 3px solid var(--line); }
+  header .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: center; justify-content: space-between; padding-top: 12px; padding-bottom: 12px; }
+  .facts { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .facts li { font: .85rem var(--mono); border: 2px solid var(--green); color: var(--green); padding: 4px 12px; }
+  .facts li::before { content: "✔ "; }
+  .hud { margin-top: 16px !important; }
+  .logo img { display: block; }
+  .god .logo img { filter: invert(1); }
+  .hero { display: flex; flex-wrap: wrap-reverse; gap: 24px 40px; align-items: center; justify-content: space-between; }
+  .hero > div { flex: 1 1 420px; }
+  .avatar { width: 200px; height: 200px; object-fit: cover; border: 4px solid var(--yellow); box-shadow: 6px 6px 0 var(--pink); }
+  .photos { display: grid; grid-template-columns: 3fr 5fr; gap: 20px; margin-top: 28px; align-items: start; }
+  .photos img { width: 100%; height: 100%; object-fit: cover; border: 3px solid var(--line); display: block; }
+  .photos figure { margin: 0; }
+  .photos figcaption { font: .8rem var(--mono); color: var(--muted); margin-top: 6px; }
+  @media (max-width: 640px) { .photos { grid-template-columns: 1fr; } .avatar { width: 140px; height: 140px; } }
+  nav a { font: .85rem var(--mono); text-transform: uppercase; letter-spacing: .06em; margin-left: 18px; text-decoration: none; color: var(--muted); }
+  nav a:first-child { margin-left: 0; }
+  nav a:hover, nav a:focus { color: var(--yellow); }
+  nav a:hover::before, nav a:focus::before { content: "▶ "; }
+
+  @media (max-width: 480px) { nav a { margin-left: 10px; font-size: .75rem; letter-spacing: 0; } }
+  section { padding: 64px 0; border-bottom: 3px solid var(--line); scroll-margin-top: 56px; }
+  .label { font: 700 .8rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin: 0 0 6px; }
+  h1 { font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1.05; margin: 0 0 10px; }
+  h2 { font-size: 1.9rem; margin: 0 0 6px; }
+  h3 { margin: 0 0 4px; font-size: 1.15rem; }
+  .sub { font-size: 1.25rem; margin: 0 0 4px; color: var(--cyan); font-weight: 600; }
+  .muted { color: var(--muted); }
+  .lead { max-width: 640px; font-size: 1.1rem; }
+  .links a { margin-right: 16px; font-weight: 600; }
+
+  .btn { display: inline-block; font: 700 1rem var(--mono); letter-spacing: .06em; text-decoration: none; color: #12122b; background: var(--yellow); border: 3px solid #12122b; box-shadow: 5px 5px 0 var(--pink); padding: 12px 20px; margin: 20px 0 8px; transition: transform .1s, box-shadow .1s; }
+  .btn:hover, .btn:focus { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--pink); }
+  .blink { animation: blink 1.2s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .blink { animation: none; } html { scroll-behavior: auto; } .btn, .card { transition: none; } }
+
+  /* HUD */
+  .hud { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 36px; }
+  .hud div { background: var(--panel); border: 3px solid var(--line); padding: 12px 14px; font: .85rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  .hud b { display: block; font-size: 1.9rem; line-height: 1.2; color: var(--fg); letter-spacing: 0; }
+  .hud i { display: block; height: 8px; margin-top: 8px; background: var(--line); }
+  .hud i::after { content: ""; display: block; height: 100%; width: var(--w); background: var(--c); }
+
+  /* Cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin-top: 32px; }
+  .card { background: var(--panel); border: 3px solid var(--line); box-shadow: 6px 6px 0 #0a0a1c; padding: 16px; transition: transform .12s, border-color .12s; }
+  .card:hover { transform: translateY(-4px); border-color: var(--yellow); }
+  .card p { margin: 6px 0; }
+  .card img, .card video, .ph { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 14px; border: 3px solid var(--line); }
+  .ph { border-style: dashed; display: grid; place-items: center; text-align: center; padding: 12px; color: var(--muted); font: .85rem var(--mono); }
+  .chips { font: .8rem var(--mono); color: var(--green); }
+  .card .links a { font: 700 .9rem var(--mono); text-transform: uppercase; }
+
+  ul.plain { list-style: none; padding: 0; margin: 24px 0 0; }
+  ul.plain li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .ach li::before { content: "🏆 "; }
+  .ach b { color: var(--yellow); }
+
+  .job { display: grid; grid-template-columns: 200px 1fr; gap: 8px 24px; margin-top: 32px; }
+  .job .lvl { font: 700 .85rem var(--mono); color: var(--yellow); text-transform: uppercase; letter-spacing: .08em; }
+  .job .when { font: .85rem var(--mono); color: var(--muted); }
+  .job.next { border: 3px dashed var(--pink); padding: 16px; }
+  @media (max-width: 640px) { .job { grid-template-columns: 1fr; gap: 0; } }
+
+  footer { padding: 32px 0; font: .8rem var(--mono); color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="images/logo.png" alt="AJSGameDev" width="64" height="44"></a>
+    <nav aria-label="Main menu">
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section>
+    <div class="wrap">
+      <div class="hero">
+      <div>
+      <p class="label">Player 1 · Munich, Germany</p>
+      <h1>Alan Stewart</h1>
+      <p class="sub">VR / XR Developer · Unreal Engine &amp; Unity</p>
+      <p class="lead">I build VR and AR apps that people actually use on the job. For seven years I've shipped training simulations and product demos for industrial clients. I like the problem-solving side most: making an interaction feel right in a headset, or building a tool so the team doesn't have to do the same thing twice.</p>
+      <a class="btn" href="#contact"><span class="blink">▶</span> PRESS START · open to work</a>
+      <p class="links">
+        <a href="https://www.linkedin.com/in/alstew92">LinkedIn</a>
+        <a href="https://github.com/ajsgamedev">GitHub</a>
+        <a href="https://ajsgamedev.itch.io">itch.io</a>
+      </p>
+      </div>
+      <img class="avatar" src="images/alan.jpg" alt="Alan Stewart" width="200" height="200">
+      </div>
+      <ul class="facts" aria-label="Quick facts">
+        <li>Available immediately</li>
+        <li>Munich · open to hybrid or relocation</li>
+        <li>EU citizen · no visa needed</li>
+        <li>English native · German intermediate</li>
+      </ul>
+      <div class="hud" aria-label="Career stats">
+        <div><b>7+ years</b>XP · commercial XR<i style="--w:88%;--c:var(--green)"></i></div>
+        <div><b>30+</b>VR apps shipped<i style="--w:100%;--c:var(--yellow)"></i></div>
+        <div><b>4</b>Platforms · PICO, Quest, Vive, HoloLens<i style="--w:100%;--c:var(--cyan)"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional work -->
+  <section id="work">
+    <div class="wrap">
+      <p class="label">Main quests</p>
+      <h2>Professional work</h2>
+      <p class="muted">Seven years of client work in VR and AR training.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>VR training &amp; step-by-step 3D guides</h3>
+          <p class="muted">Craftguide · 2019–2026</p>
+          <p>I turned paper manuals into interactive 3D training. Using models and lit scenes from the 3D team, I built the step-by-step logic. At each step a voiceover plays, and an icon and highlight show which part to work on: removing a cover, fitting an air filter, routing a cable.</p>
+          <p>Each guide shipped as a VR experience and as a tap-through mobile version. 30+ apps in total, each with 1–10 training modules, for clients including Stiebel Eltron and Pluggit.</p>
+          <p>I also added features to the in-house VR framework: teleport movement, joystick turning and voiceover repeat. I built them in Blueprint so they were quick to develop and deploy.</p>
+          <p class="chips">Unreal Engine · Blueprint · OpenXR · PICO · Meta Quest · HTC Vive</p>
+          <p class="links"><a href="https://www.si-shk.de/stiebel-eltron-setzt-auf-craftguide-170049/">Press: Stiebel Eltron</a> <a href="https://www.handwerksblatt.de/bildung/pluggit-setzt-auf-die-schritt-fuer-schritt-anleitungen-des-edutech-craftguide">Press: Pluggit</a></p>
+        </div>
+        <div class="card">
+          <video src="media/cabin-configurator.mp4" poster="images/cabin-configurator.jpg" autoplay muted loop playsinline aria-label="HoloLens recording of the Cabin Configurator: a holographic cab changing colour on a trade fair stand"></video>
+          <h3>HoloLens AR apps</h3>
+          <p class="muted">Holo-Light · 2018–2019</p>
+          <p>Augmented reality apps for Microsoft HoloLens: step-by-step task guidance, product demos, and interactive model customisation.</p>
+          <p><b>Highlight:</b> the Cabin Configurator, a HoloLens app I built for Fritzmeier Cabs that was shown at bauma 2019. Visitors scanned a marker on a real cabin and a 3D model appeared overlaid on it. They could then change its colour and swap the lights and interior options.</p>
+          <p class="chips">Unity · C# · MRTK · Vuforia · HoloLens</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AJSGameDev projects -->
+  <section id="projects">
+    <div class="wrap">
+      <p class="label">Side quests</p>
+      <h2>AJSGameDev</h2>
+      <p class="muted">Games and tools I build in my own time.</p>
+      <div class="grid">
+        <div class="card">
+          <video src="media/lucky-rugby-7.mp4" poster="images/lucky-rugby-7.png" autoplay muted loop playsinline aria-label="Lucky Rugby 7 gameplay: kicking a rugby ball at the posts"></video>
+          <h3>Lucky Rugby 7</h3>
+          <p class="muted">Unity Game Jam 2026</p>
+          <p>A rugby goal-kicking game where dice rolls can help you or work against you on every kick. Made for Unity Game Jam 2026, and you can play it in the browser.</p>
+          <p class="chips">Unity · C# · WebGL</p>
+          <p class="links"><a href="https://ajsgamedev.itch.io/lucky-rugby-7">▶ Play</a></p>
+        </div>
+        <div class="card">
+          <img src="images/haywire-igjam16.png" alt="HayWire game cover" loading="lazy">
+          <h3>HayWire</h3>
+          <p class="muted">IGJam16 · Main Prize Winner</p>
+          <p>A 2D endless runner. You play a scarecrow who swaps masks to scare off different coloured birds while jumping and sliding under fences. It won the main prize at IGJam16 and was exhibited on the Gamescom show floor in Cologne.</p>
+          <p class="chips">Unity · C#</p>
+          <p class="links"><a href="https://ajsgamedev.itch.io/haywire-igjam16">▶ Play</a> <a href="https://github.com/ajsgamedev/IGJam16">Code</a></p>
+        </div>
+        <div class="card">
+          <img src="images/vrroom-prototype.png" alt="VRRoom! game cover" loading="lazy">
+          <h3>VRRoom!</h3>
+          <p class="muted">H.Dip final year project · Samsung Gear VR</p>
+          <p>A VR racing game for Samsung Gear VR, built as my final year project for the H.Dip. in Software Development.</p>
+          <p class="chips">Unity · C# · Mobile VR</p>
+          <p class="links"><a href="https://www.youtube.com/watch?v=AemlP2t1nKY">▶ Video</a> <a href="https://ajsgamedev.itch.io/vrroom-prototype">Play</a> <a href="https://github.com/ajsgamedev/VRRoom">Code</a></p>
+        </div>
+        <div class="card">
+          <h3>Project folder setup tools</h3>
+          <p class="muted">Editor tools</p>
+          <p>One-click editor tools for Unreal and Unity that create a configurable project folder structure, so every new project starts organised.</p>
+          <p class="chips">C++ · C# · Editor tooling</p>
+          <p class="links"><a href="https://github.com/ajsgamedev/UE-Folder-Setup-Tool">Unreal</a> <a href="https://github.com/ajsgamedev/unity-folder-setup-tool">Unity</a></p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:48px">More games</h3>
+      <ul class="plain">
+        <li><a href="https://ajsgamedev.itch.io/brick-breaker-evolution-ul-game-jam-nov-2018">Brick Breaker Evolution</a> <span class="muted">· UL Game Jam 2018</span></li>
+        <li><a href="https://ajsgamedev.itch.io/match-3-line-drawer-prototype">Match-3 Line Drawer</a> <span class="muted">· Prototype</span></li>
+        <li><a href="https://ajsgamedev.itch.io/magnetic-miner-men">Magnetic Miner Men</a> <span class="muted">· Galway Game Jam 8</span></li>
+        <li><a href="https://ajsgamedev.itch.io/home-invasion-the-dabbening">Home Invasion: The Dabbening</a> <span class="muted">· Sparks Jam 2016</span></li>
+        <li><a href="https://ajsgamedev.itch.io/paper-planes">Paper Planes</a> <span class="muted">· Comp Soc Game Jam 2016</span></li>
+        <li><a href="https://ajsgamedev.itch.io">All games on itch.io →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Awards -->
+  <section>
+    <div class="wrap">
+      <p class="label">Achievements unlocked</p>
+      <h2>Awards</h2>
+      <ul class="plain ach">
+        <li><b>Main Prize Winner</b> · IGJam16 at Gamescom, Cologne (2016)</li>
+        <li><b>1st Place</b> · Comp Soc Game Jam, Limerick</li>
+        <li><b>3rd Place</b> · UL Game Jam, Limerick</li>
+        <li><b>3rd Place</b> · Sparks Jam, Dublin</li>
+      </ul>
+      <div class="photos">
+        <figure>
+          <img src="images/igjam-medal.jpg" alt="Alan holding the IGJam winner's medal beside the InnoGames Jam Cologne 2016 banner" loading="lazy">
+          <figcaption>IGJam16 medal · Cologne 2016</figcaption>
+        </figure>
+        <figure>
+          <img src="images/igjam-stage.jpg" alt="The winning team on stage at Gamescom during the IGJam16 prize giving" loading="lazy">
+          <figcaption>Prize giving on the Gamescom stage</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="label">Level select</p>
+      <h2>Experience</h2>
+      <div class="job next">
+        <div><div class="lvl">Level 3 · <span class="blink">loading…</span></div></div>
+        <div>
+          <h3>Your team?</h3>
+          <p style="margin:0">Looking for my next XR, Unreal or Unity role. <a href="#contact">Player 2, press start.</a></p>
+        </div>
+      </div>
+      <div class="job">
+        <div><div class="lvl">Level 2 · complete</div><div class="when">Aug 2019 – Jun 2026</div></div>
+        <div>
+          <h3>VR Developer · Craftguide GmbH, Munich</h3>
+          <p>VR training simulations and product demos in Unreal Engine for PICO XR, Meta Quest and HTC Vive. Full pipeline from UX design and prototyping to deployment, plus feature work on the in-house VR framework.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div><div class="lvl">Level 1 · complete</div><div class="when">Jan 2018 – Jun 2019</div></div>
+        <div>
+          <h3>Junior AR Developer · Holo-Light GmbH, Munich</h3>
+          <p>HoloLens AR apps in Unity and C# with MRTK and Vuforia, from scoping and prototyping to QA and delivery.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div><div class="lvl">Tutorial</div><div class="when">Education</div></div>
+        <div>
+          <p style="margin-top:0">H.Dip. Software Development, Limerick Institute of Technology<br>B.Sc. Computer Games Development, University of Limerick</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <p class="label">Player 2 · join game</p>
+      <h2>Contact</h2>
+      <p class="lead">Hiring for XR, Unreal or Unity work? I'd love to hear from you.</p>
+      <p class="sub"><a id="email" href="#contact">contact [at] ajsgamedev.com</a></p>
+      <p class="links">
+        <a href="https://www.linkedin.com/in/alstew92">LinkedIn</a>
+        <a href="https://github.com/ajsgamedev">GitHub</a>
+        <a href="https://ajsgamedev.itch.io">itch.io</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 AJSGameDev · Alan Stewart · → ↑ R1 R1 R1 ↓ △ △ ✕ ○ L1 L1</div>
+</footer>
+
+<script>
+  // ponytail: address assembled at runtime so naive HTML scrapers miss it; no-JS visitors see the [at] version
+  var e = ['contact', 'ajsgamedev.com'].join('@'), a = document.getElementById('email');
+  a.href = 'mailto:' + e; a.textContent = e;
+
+  // Respect reduced-motion: show the still (poster) with a play button instead of autoplaying.
+  // load() resets the video so the poster shows even if playback had already started.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches)
+    document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.controls = true; v.load(); });
+
+  // Easter egg: the San Andreas monster truck code toggles the alternate palette.
+  // Keyboard stand-ins for the pad: R = R1, L = L1, T = Triangle, X = X, C = Circle, arrows = d-pad.
+  // ponytail: keyboard only; add the Gamepad API if a real controller should work.
+  var code = 'ArrowRight,ArrowUp,r,r,r,ArrowDown,t,t,x,c,l,l', keys = [];
+  addEventListener('keydown', function (ev) {
+    keys = keys.concat(ev.key.length === 1 ? ev.key.toLowerCase() : ev.key).slice(-12);
+    if (keys.join() === code) document.documentElement.classList.toggle('god');
+  });
+</script>
+</body>
+</html>
